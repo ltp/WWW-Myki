@@ -1,0 +1,11 @@
+Changes
+MANIFEST
+Makefile.PL
+README
+lib/WWW/Myki.pm
+lib/WWW/Myki/Card.pm
+lib/WWW/Myki/Transaction.pm
+t/00-load.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
