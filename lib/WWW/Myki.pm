@@ -9,7 +9,7 @@ use WWW::Mechanize;
 use HTML::TreeBuilder;
 use Carp qw(croak);
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 sub new {
 	my( $class, %args ) = @_;
@@ -65,7 +65,7 @@ sub cards {
 
 =head1 NAME
 
-WWW::Myki - Perl interface to Myki account management interface
+WWW::Myki - A simple Perl interface to Myki online account management portal
 
 =head1 VERSION 0.01
 
@@ -81,15 +81,16 @@ WWW::Myki - Perl interface to Myki account management interface
     # Print card number, card holder, Myki money and Myki pass balances
    
     foreach $card ( $myki->cards ) {
-      print "Card number: ${ $card->id } - Holder: ${ $card->holder }\n";
-      print "Myki money balance : $ $card->money } - Myki pass balance: ${ $card->pass }\n";
+      print "Card number: ". $card->id ." - Holder: ". $card->holder "\n";
+      print "Myki money balance : ". $card->money ." - Myki pass balance: ". $card->pass ."\n";
     }
 
-    # Print the dates of our last 15 transactions
+    # Print the date, time, service, description and cost of our last 15 transactions
 
-    foreach my $trip ( $card->tranasctions ) {
-      print "${ $trip->date } - ${ $trip->time }\n"
-    }
+    foreach my $trip ( $card->transactions ) { 
+      printf( "%10s %8s %-10s %-20s %-5s\n", $trip->date, $trip->time, 
+              $trip->service, $trip->desc, $trip->debit )
+    } 
       
 =head1 DESCRIPTION
 
