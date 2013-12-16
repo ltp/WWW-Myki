@@ -7,7 +7,7 @@ use HTML::TreeBuilder;
 use Scalar::Util qw(weaken);
 use Carp qw(croak);
 
-our $VERSION	= '0.01';
+our $VERSION	= '0.02';
 our @MATTR	= qw(id _link holder money pass);
 our @ATTR	= qw(id _link holder money pass type expiry status money_top_up
 		     money_total active_pass inactive_pass last_transaction);
@@ -74,6 +74,8 @@ sub transactions {
 
 	for ( $t->look_down( _tag => 'tr' ) ) { 
 		my @cols = map { $_->as_text } $_->look_down( _tag => 'td' ) or next;
+		return () if ( $cols[0] =~ /.*no record found.*/i );
+
 		push @{ $self->{transactions} },  
 			WWW::Myki::Transaction->new(
 					date    => $cols[0],
@@ -182,7 +184,8 @@ where Mon is the abbreviated month name.
   # 29/05/2012 17:28:38 Bus        Surburbia,Route SUB16out_new
   # 29/05/2012 08:08:12 Bus        Metro,Route MET16in_new
 
-Returns an array of L<WWW::Myki::Transaction> objects representing the last 15 transactions for the card.
+Returns an array of L<WWW::Myki::Transaction> objects representing the last 15 transactions for the card, or
+an empty array if there are no recorded transactions.
 
 See L<WWW::Myki::Transaction> for more information on transactions.  Transaction data is cached on the initial
 invocation to increase the performance of subsequent calls and reduce unnecessary communication with the Myki
