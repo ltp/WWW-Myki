@@ -9,7 +9,7 @@ use WWW::Mechanize;
 use HTML::TreeBuilder;
 use Carp qw(croak);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new {
 	my( $class, %args ) = @_;
@@ -17,11 +17,11 @@ sub new {
 	bless $self, $class;
 	$args{username}	? $self->{username} = $args{username} : croak 'Constructor failed: must specify username';
 	$args{password}	? $self->{password} = $args{password} : croak 'Constructor failed: must specify password';
-	$self->{_mech}	= WWW::Mechanize->new();
+	$self->{_mech}	= WWW::Mechanize->new( ssl_opts => { verify_hostname => 0 } );
 	$self->{_url}	= {
 			base	=> 'https://www.mymyki.com.au/NTSWebPortal/',
 			account	=> 'Registered/MyMykiAccount.aspx?menu=My+myki+account',
-			login	=> 'login.aspx'
+			login	=> 'Login.aspx'
 			};
 	$self->_login;
 	return $self
