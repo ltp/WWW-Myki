@@ -39,9 +39,13 @@ WWW::Myki::Transaction - Class for operations with a Myki transaction
   # Print the date, time, service, description and cost of our last 15 transactions
 
   foreach my $trip ( $card->transactions ) { 
-    printf( "%10s %8s %-10s %-20s %-5s\n", $trip->date, $trip->time, 
-            $trip->service, $trip->desc, $trip->debit )
-  } 
+    printf( "%10s %8s %-10s %-20s %-5s\n", 
+            $trip->date,
+            $trip->time, 
+            $trip->service,
+            $trip->desc,
+            $trip->debit )
+  }
 
   # Maybe do a rough calculation of the cost of public transport per day
 
@@ -53,10 +57,10 @@ WWW::Myki::Transaction - Class for operations with a Myki transaction
     $sum{ $t->date } += $cost;
   }
 
-  print "Average daily cost of travel on public transport: ",
-		( ( sum values %sum ) / ( keys %sum ) ), "\n";
+  print "Average daily cost of travel on public transport: "
+    . ( ( sum values %sum ) / ( keys %sum ) ) . "\n";
 
-  # Still cheaper than environmental cost of driving to work
+  # Still cheaper than the environmental cost of driving to work
     
 =head1 DESCRIPTION
 

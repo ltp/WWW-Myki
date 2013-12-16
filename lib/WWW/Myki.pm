@@ -74,9 +74,9 @@ WWW::Myki - A simple Perl interface to Myki online account management portal
     use WWW::Myki;
 
     my $myki = WWW::Myki->new(
-				username => 'myusername',
-				password => 'mypassw0rd'
-			);
+                                username => 'myusername',
+                                password => 'mypassw0rd'
+                             );
 
     # Print card number, card holder, Myki money and Myki pass balances
    
@@ -88,9 +88,13 @@ WWW::Myki - A simple Perl interface to Myki online account management portal
     # Print the date, time, service, description and cost of our last 15 transactions
 
     foreach my $trip ( $card->transactions ) { 
-      printf( "%10s %8s %-10s %-20s %-5s\n", $trip->date, $trip->time, 
-              $trip->service, $trip->desc, $trip->debit )
-    } 
+      printf( "%10s %8s %-10s %-20s %-5s\n", 
+              $trip->date, 
+              $trip->time, 
+              $trip->service, 
+              $trip->desc, 
+              $trip->debit )
+    }
       
 =head1 DESCRIPTION
 
