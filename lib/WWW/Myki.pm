@@ -67,7 +67,7 @@ sub cards {
 
 WWW::Myki - A simple Perl interface to Myki online account management portal
 
-=head1 VERSION 0.01
+=head1 VERSION 0.04
 
 =head1 SYNOPSIS
 
@@ -100,6 +100,10 @@ WWW::Myki - A simple Perl interface to Myki online account management portal
 
 L<WWW::Myki> provides a simple interface to the Myki online account management portal functionality
 for registered Myki users.
+
+Please note that the base class provides only a single method; B<cards>, which returns a L<WWW::Myki::Card> 
+object which does much more interesting things.  Make sure you explore the methods in the other
+WWW::Myki classes for functionality that you may be seeking.
 
 =head1 METHODS
 
